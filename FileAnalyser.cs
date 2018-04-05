@@ -32,9 +32,9 @@ namespace XmlDivider
             int id = 0;
             do
             {
-                using(StreamWriter writer = new StreamWriter(path + @"/parts/" + Regex.Replace(filename, ".xml", " " + id.ToString() + ".xml")))
+                using(StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + @"/parts/" + Regex.Replace(filename, ".xml", " " + id.ToString() + ".xml")))
                 {
-                    Console.WriteLine(path + @"/parts/" + Regex.Replace(filename, ".xml", " " + id.ToString() + ".xml"));
+                    Console.WriteLine(Directory.GetCurrentDirectory() + @"/parts/" + Regex.Replace(filename, ".xml", " " + id.ToString() + ".xml"));
                     foreach (String str in header)
                     {
                         writer.WriteLine(str);
