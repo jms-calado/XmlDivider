@@ -113,14 +113,15 @@ namespace XmlDivider
             //  Show that an error has been detected.
             Console.WriteLine("The FileSystemWatcher has detected an error");
             //  Give more information if the error is due to an internal buffer overflow.
-            /*if (e.GetException().GetType() == typeof(System.IO.InternalBufferOverflowException))
+            if (e.GetException().GetType() == typeof(System.IO.InternalBufferOverflowException))
             {
                 //  This can happen if Windows is reporting many file system events quickly 
                 //  and internal buffer of the  FileSystemWatcher is not large enough to handle this
                 //  rate of events. The InternalBufferOverflowException error informs the application
                 //  that some of the file system events are being lost.
                 Console.WriteLine(("The file system watcher experienced an internal buffer overflow: " + e.GetException().Message));
-            }*/
+            }
+            Console.WriteLine(e.GetException().Message);
         }
         protected virtual bool IsFileLocked(FileInfo file)
         {
