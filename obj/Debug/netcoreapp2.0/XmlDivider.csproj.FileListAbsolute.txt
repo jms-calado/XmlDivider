@@ -1,0 +1,10 @@
+C:\Users\GRIS\Dropbox\ano3s1\Tese\GIT\ACACIA\XmlDivider\bin\Debug\netcoreapp2.0\XmlDivider.deps.json
+C:\Users\GRIS\Dropbox\ano3s1\Tese\GIT\ACACIA\XmlDivider\bin\Debug\netcoreapp2.0\XmlDivider.runtimeconfig.json
+C:\Users\GRIS\Dropbox\ano3s1\Tese\GIT\ACACIA\XmlDivider\bin\Debug\netcoreapp2.0\XmlDivider.runtimeconfig.dev.json
+C:\Users\GRIS\Dropbox\ano3s1\Tese\GIT\ACACIA\XmlDivider\bin\Debug\netcoreapp2.0\XmlDivider.dll
+C:\Users\GRIS\Dropbox\ano3s1\Tese\GIT\ACACIA\XmlDivider\bin\Debug\netcoreapp2.0\XmlDivider.pdb
+C:\Users\GRIS\Dropbox\ano3s1\Tese\GIT\ACACIA\XmlDivider\obj\Debug\netcoreapp2.0\XmlDivider.csproj.CoreCompileInputs.cache
+C:\Users\GRIS\Dropbox\ano3s1\Tese\GIT\ACACIA\XmlDivider\obj\Debug\netcoreapp2.0\XmlDivider.AssemblyInfoInputs.cache
+C:\Users\GRIS\Dropbox\ano3s1\Tese\GIT\ACACIA\XmlDivider\obj\Debug\netcoreapp2.0\XmlDivider.AssemblyInfo.cs
+C:\Users\GRIS\Dropbox\ano3s1\Tese\GIT\ACACIA\XmlDivider\obj\Debug\netcoreapp2.0\XmlDivider.dll
+C:\Users\GRIS\Dropbox\ano3s1\Tese\GIT\ACACIA\XmlDivider\obj\Debug\netcoreapp2.0\XmlDivider.pdb
