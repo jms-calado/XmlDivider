@@ -41,7 +41,7 @@ namespace XmlDivider
                         writer.WriteLine(str);
                     }
                     int j = 0;
-                    while (j < 50 && !eof)
+                    while (j < 250 && !eof)
                     {
                         for (int i = 0; i < 12; i++)
                         {
