@@ -12,6 +12,7 @@ namespace XmlDivider
         private void Analyser(string file, string filename)
         {
             String path = Path.GetDirectoryName(file);
+            //FileStream stream = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.Read);
             StreamReader reader = new StreamReader(file);
             
             String[] header = new String[7];
@@ -86,7 +87,7 @@ namespace XmlDivider
             watcher.Path = watcherFolder;
             //openFileDialog1.Filter = "Xml|*.xml";
             watcher.NotifyFilter = NotifyFilters.LastWrite;
-            watcher.Filter = "*.*";
+            watcher.Filter = "*.xml";
             //  Register a handler that gets called when a file is created
             watcher.Changed += new FileSystemEventHandler(OnChanged);
             //  Register a handler that gets called if the 
@@ -101,9 +102,12 @@ namespace XmlDivider
             //  Show that a file has been created, changed, or deleted.
             WatcherChangeTypes wct = e.ChangeType;
             Console.WriteLine("File {0} {1}", e.FullPath, wct.ToString());
+            while (IsFileLocked(new FileInfo(e.FullPath)))
+            {
+                Task.Delay(10000).Wait();
+            }
             if (!IsFileLocked(new FileInfo(e.FullPath)))
             {
-                Task.Delay(5000).Wait();
                 string filename = Path.GetFileName(e.FullPath);
                 Analyser(e.FullPath, filename);
             }
@@ -124,13 +128,18 @@ namespace XmlDivider
             }
             Console.WriteLine(e.GetException().Message);
         }
+        //Restart FileWatcher
+        private static void RestartFileWatcher(FileSystemWatcher watcher)
+        {
+
+        }
         protected virtual bool IsFileLocked(FileInfo file)
         {
             FileStream stream = null;
 
             try
             {
-                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
+                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.Read);
             }
             catch (IOException err)
             {
