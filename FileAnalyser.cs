@@ -104,10 +104,12 @@ namespace XmlDivider
             Console.WriteLine("File {0} {1}", e.FullPath, wct.ToString());
             while (IsFileLocked(new FileInfo(e.FullPath)))
             {
-                Task.Delay(10000).Wait();
+                Task.Delay(1000).Wait();
+                Console.WriteLine(e.FullPath.ToString() + " is locked");
             }
             if (!IsFileLocked(new FileInfo(e.FullPath)))
             {
+                Task.Delay(10000).Wait();
                 string filename = Path.GetFileName(e.FullPath);
                 Analyser(e.FullPath, filename);
             }
