@@ -33,49 +33,62 @@ namespace XmlDivider
             int id = 0;
             do
             {
-                var part = File.Create(Directory.GetCurrentDirectory() + @"/parts/" + Regex.Replace(filename, ".xml", " " + id.ToString() + ".xml"));
-                Console.WriteLine(Directory.GetCurrentDirectory() + @"/parts/" + Regex.Replace(filename, ".xml", " " + id.ToString() + ".xml"));
-                using(StreamWriter writer = new StreamWriter(part))
+                try
                 {
-                    foreach (String str in header)
+                    var part = File.Create(Directory.GetCurrentDirectory() + @"/parts/" + Regex.Replace(filename, ".xml", " " + id.ToString() + ".xml"));
+                    Console.WriteLine(Directory.GetCurrentDirectory() + @"/parts/" + Regex.Replace(filename, ".xml", " " + id.ToString() + ".xml"));
+                    using(StreamWriter writer = new StreamWriter(part))
                     {
-                        writer.WriteLine(str);
-                    }
-                    int j = 0;
-                    while (j < 250 && !eof)
-                    {
-                        for (int i = 0; i < 12; i++)
+                        foreach (String str in header)
                         {
-                            try
+                            writer.WriteLine(str);
+                        }
+                        int j = 0;
+                        while (j < 250 && !eof)
+                        {
+                            for (int i = 0; i < 12; i++)
                             {
-                                String line = null;
-                                if ((line = reader.ReadLine()) != null)
+                                try
                                 {
-                                    if(line.Contains("</emotionml>"))
-                                    {                                    
+                                    String line = null;
+                                    if ((line = reader.ReadLine()) != null)
+                                    {
+                                        if(line.Contains("</emotionml>"))
+                                        {                                    
+                                            eof = true;
+                                            break;
+                                        }
+                                        writer.WriteLine(line);
+                                    }
+                                    else
+                                    {
                                         eof = true;
                                         break;
                                     }
-                                    writer.WriteLine(line);
                                 }
-                                else
+                                catch (Exception ex)
                                 {
+                                    Console.WriteLine(ex);
                                     eof = true;
                                     break;
                                 }
                             }
-                            catch (Exception ex)
-                            {
-                                Console.WriteLine(ex);
-                                eof = true;
-                                break;
-                            }
+                            j++;
                         }
-                        j++;
+                        writer.WriteLine("</emotionml>");
+                        writer.Close();
+                        id++;
                     }
-                    writer.WriteLine("</emotionml>");
-                    writer.Close();
-                    id++;
+                }
+                catch(AccessViolationException ex)
+                {
+                    Console.WriteLine(ex);
+                    eof = true;
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    eof = true;
                 }
             }
             while (!eof);
@@ -90,7 +103,7 @@ namespace XmlDivider
             watcher.NotifyFilter = NotifyFilters.LastWrite;
             watcher.Filter = "*.xml";
             //  Register a handler that gets called when a file is created
-            watcher.Changed += new FileSystemEventHandler(OnChanged);
+            watcher.Created += new FileSystemEventHandler(OnChanged);
             //  Register a handler that gets called if the 
             //  FileSystemWatcher needs to report an error.
             watcher.Error += new ErrorEventHandler(OnError);
