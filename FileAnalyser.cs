@@ -74,6 +74,7 @@ namespace XmlDivider
                         j++;
                     }
                     writer.WriteLine("</emotionml>");
+                    writer.Close();
                     id++;
                 }
             }
